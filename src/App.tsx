@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { JSXElementConstructor, ReactElement, useState } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [isDark, setIsDark] = useState(false)
 
   return (
-    <div className="App">
+    <main className="App max-w-md">
       
-    </div>
+    </main>
   )
 }
 
