@@ -1,8 +1,14 @@
 import React from 'react'
 
-const ListItem = () => {
+type Props = {
+  children: JSX.Element
+}
+
+const ListItem: React.FC<Props> = ({children}) => {
   return (
-    <div>ListItem</div>
+    <li className='flex justify-between text-lg flex-nowrap gap-x-6 border-b-[.1px] border-black/30 dark:border-white/30'>
+      {children}
+    </li>
   )
 }
 
