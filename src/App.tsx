@@ -7,7 +7,7 @@ const App = () => {
 
   const switchTheme = () => {setIsDark(!isDark)}
 
-  const tmp = ['Agua', 'Pasta', 'Masa de pizza', 'Queso Chéddar']
+  let tmp = ['Agua', 'Pasta', 'Masa de pizza', 'Queso Chéddar', 'Coca Cola', 'Patatas']
 
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches)
@@ -28,7 +28,7 @@ const App = () => {
             return(
               <ListItem key={index}>
                 <>
-                  {objeto}
+                  <p>{objeto}</p>
                   <button><BsFillTrashFill /></button>
                 </>
               </ListItem>
