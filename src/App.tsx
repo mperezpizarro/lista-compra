@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react'
-import { Navbar } from './components'
-import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs'
+import React, { useState, useEffect } from 'react'
+import { Navbar, ListContainer, ListItem } from './components'
+import { BsFillMoonStarsFill, BsFillSunFill, BsFillTrashFill } from 'react-icons/bs'
 
 const App = () => {
   const [isDark, setIsDark] = useState(false)
 
   const switchTheme = () => {setIsDark(!isDark)}
+
+  const tmp = ['Agua', 'Pasta', 'Masa de pizza', 'Queso Chéddar']
 
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches)
@@ -21,6 +23,18 @@ const App = () => {
         <Navbar>
           <button className='text-xl p-4 rounded-full bg-[#00000011] dark:bg-[#ffffff11]' onClick={switchTheme}>{isDark ? <BsFillSunFill /> : <BsFillMoonStarsFill />}</button>
         </Navbar>
+        <ListContainer>
+          {tmp.map((objeto, index): JSX.Element => {
+            return(
+              <ListItem key={index}>
+                <>
+                  {objeto}
+                  <button><BsFillTrashFill /></button>
+                </>
+              </ListItem>
+            )
+          })}
+        </ListContainer>
       </div>
     </main>
   )
