@@ -29,7 +29,7 @@ const App = () => {
               <ListItem key={index}>
                 <>
                   <p>{objeto}</p>
-                  <button><BsFillTrashFill /></button>
+                  <button className='text-xl'><BsFillTrashFill /></button>
                 </>
               </ListItem>
             )
