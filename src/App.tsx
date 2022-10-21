@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Navbar, ListContainer, ListItem } from './components'
 import { BsFillMoonStarsFill, BsFillSunFill, BsFillTrashFill } from 'react-icons/bs'
 
 const App = () => {
   const [isDark, setIsDark] = useState(false)
   const [newItem, setNewItem] = useState('')
+  const [items, setItems] = useState<String[]>([])
 
   const switchTheme = () => {setIsDark(!isDark)}
 
   const addItem = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('asasa');
-    
+    setItems(previous => [...previous, newItem])
+    setNewItem('')
   }
 
-  let tmp = ['Agua', 'Pasta', 'Masa de pizza', 'Queso Chéddar', 'Coca Cola', 'Patatas']
+  const deleteItem = (index: number) => {
+    let tmp = items
+    tmp.splice(index, 1)
+    setItems(tmp)
+    //Forces list to re-render
+    setNewItem('‎')
+  }
 
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches)
@@ -30,19 +37,22 @@ const App = () => {
         <Navbar>
           <button className='text-xl p-4 rounded-full bg-[#00000011] dark:bg-[#ffffff11]' onClick={switchTheme}>{isDark ? <BsFillSunFill /> : <BsFillMoonStarsFill />}</button>
         </Navbar>
-        <form onSubmit={addItem}>
-          <div>
-            <input type="text" name="itemName" id="itemName" placeholder='¿Qué necesitas comprar?' />
-            <button type="submit">Añadir</button>
+        <form onSubmit={addItem} className='my-4'>
+          <div className='flex gap-x-4 border-2 border-black dark:border-white rounded-md'>
+            <input 
+              type="text" name="itemName" id="itemName" placeholder='¿Qué necesitas comprar?' value={newItem} onChange={(e)=>{setNewItem(e.target.value)}}
+              className='flex-1 bg-transparent dark:text-white outline-none border-transparent px-4 py-2' 
+            />
+            <button type="submit" className='bg-black text-white dark:bg-white dark:text-black hover:opacity-80 px-4 py-2'>Añadir</button>
           </div>
         </form>
         <ListContainer>
-          {tmp.map((objeto, index): JSX.Element => {
+          {items.map((objeto, index): JSX.Element => {
             return(
               <ListItem key={index}>
                 <>
                   <p>{objeto}</p>
-                  <button className='text-xl'><BsFillTrashFill /></button>
+                  <button className='text-xl' onClick={() => deleteItem(index)}><BsFillTrashFill /></button>
                 </>
               </ListItem>
             )
