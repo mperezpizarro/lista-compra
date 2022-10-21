@@ -4,8 +4,15 @@ import { BsFillMoonStarsFill, BsFillSunFill, BsFillTrashFill } from 'react-icons
 
 const App = () => {
   const [isDark, setIsDark] = useState(false)
+  const [newItem, setNewItem] = useState('')
 
   const switchTheme = () => {setIsDark(!isDark)}
+
+  const addItem = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('asasa');
+    
+  }
 
   let tmp = ['Agua', 'Pasta', 'Masa de pizza', 'Queso Chéddar', 'Coca Cola', 'Patatas']
 
@@ -23,6 +30,12 @@ const App = () => {
         <Navbar>
           <button className='text-xl p-4 rounded-full bg-[#00000011] dark:bg-[#ffffff11]' onClick={switchTheme}>{isDark ? <BsFillSunFill /> : <BsFillMoonStarsFill />}</button>
         </Navbar>
+        <form onSubmit={addItem}>
+          <div>
+            <input type="text" name="itemName" id="itemName" placeholder='¿Qué necesitas comprar?' />
+            <button type="submit">Añadir</button>
+          </div>
+        </form>
         <ListContainer>
           {tmp.map((objeto, index): JSX.Element => {
             return(
